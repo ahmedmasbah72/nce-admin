@@ -4,9 +4,25 @@
       {
         "src": "api/index.php",
         "use": "vercel-php@0.6.0"
+      },
+      {
+        "src": "public/**",
+        "use": "@vercel/static"
       }
     ],
     "routes": [
+      {
+        "src": "/build/(.*)",
+        "dest": "/public/build/$1"
+      },
+      {
+        "src": "/(css|js|images)/(.*)",
+        "dest": "/public/$1/$2"
+      },
+      {
+        "src": "/(.*\\.(css|js|html|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+        "dest": "/public/$1"
+      },
       {
         "src": "/(.*)",
         "dest": "/api/index.php"
@@ -14,7 +30,7 @@
     ],
     "env": {
       "APP_CONFIG_CACHE": "/tmp/config.php",
-      "APP_EVENTS_CACHE": "/tmp/events.php",
+      "APP_EVENTS_CACHE": "/tmp/events.php", 
       "APP_PACKAGES_CACHE": "/tmp/packages.php",
       "APP_ROUTES_CACHE": "/tmp/routes.php",
       "APP_SERVICES_CACHE": "/tmp/services.php",
